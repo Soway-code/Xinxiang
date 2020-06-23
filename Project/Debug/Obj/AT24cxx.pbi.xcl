@@ -1,53 +1,53 @@
-"F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\BSP\AT24cxx.c"
+"E:\project_repo\Xinxiang\Source\BSP\AT24cxx.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\BSP
+E:\project_repo\Xinxiang\Source\BSP
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Project\..\Source\APP\inc
+E:\project_repo\Xinxiang\Project\..\Source\APP\inc
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Project\..\Source\BSP\inc
+E:\project_repo\Xinxiang\Project\..\Source\BSP\inc
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Project\..\Source\FWLIB\inc
+E:\project_repo\Xinxiang\Project\..\Source\FWLIB\inc
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Project\..\Source\System\OS_Cfg
+E:\project_repo\Xinxiang\Project\..\Source\System\OS_Cfg
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Project\..\Source\System\uC-CPU
+E:\project_repo\Xinxiang\Project\..\Source\System\uC-CPU
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Project\..\Source\System\uC-LIB
+E:\project_repo\Xinxiang\Project\..\Source\System\uC-LIB
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Project\..\Source\System\uCOS-III\Ports
+E:\project_repo\Xinxiang\Project\..\Source\System\uCOS-III\Ports
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Project\..\Source\System\uCOS-III\Source
+E:\project_repo\Xinxiang\Project\..\Source\System\uCOS-III\Source
 -I
-C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\CMSIS\Core\Include
+D:\Embedded Workbench 8.1\arm\CMSIS\Core\Include
 -I
-C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\CMSIS\DSP\Include
+D:\Embedded Workbench 8.1\arm\CMSIS\DSP\Include
 -I
-C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\inc
+D:\Embedded Workbench 8.1\arm\inc
 -I
-C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\inc\c
+D:\Embedded Workbench 8.1\arm\inc\c
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\APP\inc
+E:\project_repo\Xinxiang\Source\APP\inc
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\BSP\inc
+E:\project_repo\Xinxiang\Source\BSP\inc
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\FWLIB\inc
+E:\project_repo\Xinxiang\Source\FWLIB\inc
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\System\OS_Cfg
+E:\project_repo\Xinxiang\Source\System\OS_Cfg
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\System\uC-CPU
+E:\project_repo\Xinxiang\Source\System\uC-CPU
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\System\uC-LIB
+E:\project_repo\Xinxiang\Source\System\uC-LIB
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\System\uCOS-III\Ports
+E:\project_repo\Xinxiang\Source\System\uCOS-III\Ports
 -I
-F:\信为产品\10 - SFC-A 油液传感器\SCap_Car(F3协议)\Source\System\uCOS-III\Source
+E:\project_repo\Xinxiang\Source\System\uCOS-III\Source
 -I
-C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\CMSIS\Core\Include
+D:\Embedded Workbench 8.1\arm\CMSIS\Core\Include
 -I
-C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\CMSIS\DSP\Include
+D:\Embedded Workbench 8.1\arm\CMSIS\DSP\Include
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=127
 -D__CHAR_MIN__=(-__CHAR_MAX__-1)
@@ -301,8 +301,8 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.1\arm\CMSIS\DSP\Include
 -D__EDG_FLOAT128_ENABLING_POSSIBLE=0
 -DUSE_STDPERIPH_DRIVER=1
 -DSTM32F072=1
--D_DLIB_CONFIG_FILE_HEADER_NAME="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.1\\arm\\inc\\c\\DLib_Config_Normal.h"
--D_DLIB_CONFIG_FILE_STRING="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.1\\arm\\inc\\c\\DLib_Config_Normal.h"
+-D_DLIB_CONFIG_FILE_HEADER_NAME="D:\\Embedded Workbench 8.1\\arm\\inc\\c\\DLib_Config_Normal.h"
+-D_DLIB_CONFIG_FILE_STRING="D:\\Embedded Workbench 8.1\\arm\\inc\\c\\DLib_Config_Normal.h"
 -D__VERSION__="IAR ANSI C/C++ Compiler V8.30.1.114/W32 for ARM"
 -D__ICCARM_OLD_DEFINED_VAARGS__=1
 -D__VA_STACK_ALIGN__=8
