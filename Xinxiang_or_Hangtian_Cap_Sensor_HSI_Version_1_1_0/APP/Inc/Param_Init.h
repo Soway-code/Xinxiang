@@ -1,5 +1,23 @@
+/**@file        Param_Init.h
+* @details      Param_Init.c的头文件,声明了各个设备或模块的运行参数的初始化函数
+* @author       杨春林
+* @date         2020-09-22
+* @version      V1.0.0
+* @copyright    2020-2030,深圳市信为科技发展有限公司
+**********************************************************************************
+* @par 修改日志:
+* <table>
+* <tr><th>Date        <th>Version  <th>Author    <th>Description
+* <tr><td>2020/09/22  <td>1.0.0    <td>杨春林    <td>创建初始版本
+* </table>
+*
+**********************************************************************************
+*/
 #ifndef __PARAM_INIT_H
 #define __PARAM_INIT_H
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 #include "In_Memory_app.h"
 #include "ModBus.h"
@@ -42,4 +60,7 @@ void DataConvertParam_Init(PCap_DataConvert_Param *DataConvert_Param);
 */
 void Sensor_ADC_TemperParam_Init(ADC_TemperParam_TypeDef *ADC_TemperParam);
 
+#ifdef __cplusplus
+}
+#endif
 #endif // __PARAM_INIT_H
