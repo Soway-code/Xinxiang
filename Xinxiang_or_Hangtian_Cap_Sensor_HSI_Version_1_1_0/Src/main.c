@@ -80,9 +80,6 @@ int main(void)
     TIM_DevObj_Init();                                  //定时器设备对象初始化
     tim_dev[TIM3_INDEX].tim_pwm_init(0, 8121, 4061);    //定时器3初始化
     tim_dev[TIM3_INDEX].tim_pwm_start(TIM_CHANNEL_2);   //定时器3 PWM 启动
-    tim_dev[TIM3_INDEX].tim_set_pwm(TIM_CHANNEL_2, 
-                                    DataConvert_Out.PCap_PWM_Value, 
-                                    DataConvert_Out.PCap_PWM_Value / 2);
 #endif // USING_PWM
     BSP_IWDG_Init();                                    //独立看门狗初始化
     ModBus_Param_Init(&ModBusBaseParam);                //ModBus参数初始化

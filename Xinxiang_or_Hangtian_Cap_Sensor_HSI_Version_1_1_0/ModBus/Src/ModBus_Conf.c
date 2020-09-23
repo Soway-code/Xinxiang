@@ -997,7 +997,7 @@ void ModbusFunc25(ModBusBaseParam_TypeDef *ModBusBaseParam, void *arg)
             {
                 if(0xFF00 == DataBuf)
                 {
-                    CapDA_ClibFlag |= CALIB_CAPDAHIH_FLAG;
+                    CapDA_ClibFlag |= CALIB_CAPDAHIGH_FLAG;
                 }
                 else
                 {
@@ -1103,7 +1103,8 @@ void ModbusFunc25(ModBusBaseParam_TypeDef *ModBusBaseParam, void *arg)
                 Device_Param->PCap_DataConvert->CapPWM_ClibEn = CLIB_DISABLE;
             }
 
-            if((CLIB_DISABLE == Device_Param->PCap_DataConvert->CapPWM_ClibEn) && (CALIB_CAPPWMEOC_FLAG == CapPWM_ClibFlag))
+            if((CLIB_DISABLE == Device_Param->PCap_DataConvert->CapPWM_ClibEn) 
+                && (CapPWM_ClibFlag != CALIB_CLEAR))
             {
                 MB_CapPWMOut_Calibration(arg);
                 CapPWM_ClibFlag = CALIB_CLEAR;
@@ -2427,33 +2428,36 @@ void MB_CapDAOut_Calibration(void *arg)
 {
     //设备参数
     ModBus_Device_Param *Device_Param;
+    uint8_t Write_Flag = 0;
     
     Device_Param = (ModBus_Device_Param *)arg;
-    if(CapDA_ClibFlag == (CALIB_CAPDAMAX_FLAG | CALIB_CAPDAMIN_FLAG))
+    if((CapDA_ClibFlag & (CALIB_CAPDAMAX_FLAG | CALIB_CAPDAMIN_FLAG)) == (CALIB_CAPDAMAX_FLAG | CALIB_CAPDAMIN_FLAG))
     {
         if(Calib_DAMax <= Calib_DAMin)
         {
             return;
-        }
-        Calib_DAHigh = 0;
-        Calib_DALow = 0;        
+        }     
+        Device_Param->PCap_DataConvert->CapDA_Calib.CapDAMin = Calib_DAMin;
+        Device_Param->PCap_DataConvert->CapDA_Calib.CapDAMax = Calib_DAMax;
+        Write_Flag = 1;
     }
-    else
+    if((CapDA_ClibFlag & (CALIB_CAPDAHIGH_FLAG | CALIB_CAPDALOW_FLAG)) == (CALIB_CAPDAHIGH_FLAG | CALIB_CAPDALOW_FLAG))
     {
-        if((Calib_DAMax <= Calib_DAHigh) 
-            || (Calib_DAHigh <= Calib_DALow) 
-            || (Calib_DALow <= Calib_DAMin))
+        if(Calib_DAHigh <= Calib_DALow)
         {
             return;
-        }
-    }    
-    Device_Param->PCap_DataConvert->CapDA_Calib.CapDAMin = Calib_DAMin;
-    Device_Param->PCap_DataConvert->CapDA_Calib.CapDALow = Calib_DALow;
-    Device_Param->PCap_DataConvert->CapDA_Calib.CapDAHigh = Calib_DAHigh;
-    Device_Param->PCap_DataConvert->CapDA_Calib.CapDAMax = Calib_DAMax;                
-    InMemory_Write2T_MultiBytes((uint32_t)&(((PCap_DataConvert_Param *)PCAP_PARAM_BASE_ADDRESS)->CapDA_Calib),
-                                (uint8_t *)&Device_Param->PCap_DataConvert->CapDA_Calib, 
-                                sizeof(Device_Param->PCap_DataConvert->CapDA_Calib));            
+        }     
+        Device_Param->PCap_DataConvert->CapDA_Calib.CapDALow = Calib_DALow;
+        Device_Param->PCap_DataConvert->CapDA_Calib.CapDAHigh = Calib_DAHigh;
+        Write_Flag = 1;
+    }          
+            
+    if(Write_Flag)
+    {
+        InMemory_Write2T_MultiBytes((uint32_t)&(((PCap_DataConvert_Param *)PCAP_PARAM_BASE_ADDRESS)->CapDA_Calib),
+                                    (uint8_t *)&Device_Param->PCap_DataConvert->CapDA_Calib, 
+                                    sizeof(Device_Param->PCap_DataConvert->CapDA_Calib));        
+    }        
 }
 #endif // USING_DAC
 
@@ -2493,30 +2497,46 @@ void MB_CapPWMOut_Calibration(void *arg)
 {
     //设备参数
     ModBus_Device_Param *Device_Param;
+    uint8_t Write_Flag = 0;
     
     Device_Param = (ModBus_Device_Param *)arg;
-    if(CapPWM_ClibFlag == CALIB_CAPPWMEOC_FLAG)
+    if((CapPWM_ClibFlag & (CALIB_CAPPWM0_FLAG | CALIB_CAPPWM1_FLAG)) == (CALIB_CAPPWM0_FLAG | CALIB_CAPPWM1_FLAG))
     {
-        if(Calib_PWM0 <= Calib_PWM1 || Calib_PWM1 <= Calib_PWM2
-             || Calib_PWM2 <= Calib_PWM3 || Calib_PWM3 <= Calib_PWM4
-             || Calib_PWM4 <= Calib_PWM5)
+        if(Calib_PWM0 <= Calib_PWM1)
         {
             return;
         }     
+        Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM0 = Calib_PWM0;
+        Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM1 = Calib_PWM1;
+        Write_Flag = 1;
     }
-    else
+    if((CapPWM_ClibFlag & (CALIB_CAPPWM2_FLAG | CALIB_CAPPWM3_FLAG)) == (CALIB_CAPPWM2_FLAG | CALIB_CAPPWM3_FLAG))
     {
-        return;
-    }                    
-    Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM0 = Calib_PWM0;
-    Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM1 = Calib_PWM1;
-    Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM2 = Calib_PWM2;
-    Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM3 = Calib_PWM3;
-    Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM4 = Calib_PWM4;
-    Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM5 = Calib_PWM5;
-    InMemory_Write2T_MultiBytes((uint32_t)&(((PCap_DataConvert_Param *)PCAP_PARAM_BASE_ADDRESS)->CapPWM_Calib),
-                                (uint8_t *)&Device_Param->PCap_DataConvert->CapPWM_Calib, 
-                                sizeof(Device_Param->PCap_DataConvert->CapPWM_Calib));      
+        if(Calib_PWM2 <= Calib_PWM3)
+        {
+            return;
+        }     
+        Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM2 = Calib_PWM2;
+        Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM3 = Calib_PWM3;
+        Write_Flag = 1;
+    }
+    if((CapPWM_ClibFlag & (CALIB_CAPPWM4_FLAG | CALIB_CAPPWM5_FLAG)) == (CALIB_CAPPWM4_FLAG | CALIB_CAPPWM5_FLAG))
+    {
+        if(Calib_PWM4 <= Calib_PWM5)
+        {
+            return;
+        }     
+        Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM4 = Calib_PWM4;
+        Device_Param->PCap_DataConvert->CapPWM_Calib.CapPWM5 = Calib_PWM5;
+        Write_Flag = 1;
+    }    
+        
+    if(Write_Flag)
+    {
+        InMemory_Write2T_MultiBytes((uint32_t)&(((PCap_DataConvert_Param *)PCAP_PARAM_BASE_ADDRESS)->CapPWM_Calib),
+                                    (uint8_t *)&Device_Param->PCap_DataConvert->CapPWM_Calib, 
+                                    sizeof(Device_Param->PCap_DataConvert->CapPWM_Calib));      
+    }
 }
 
 #endif // USING_PWM

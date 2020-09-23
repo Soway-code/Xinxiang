@@ -102,7 +102,7 @@
 
 #define CALIB_CAPDAMIN_FLAG             0x01                ///< 标定电容DA零点标志
 #define CALIB_CAPDALOW_FLAG             0x02                ///< 标定电容DA下刻度标志
-#define CALIB_CAPDAHIH_FLAG             0x10                ///< 标定电容DA上刻度标志
+#define CALIB_CAPDAHIGH_FLAG            0x10                ///< 标定电容DA上刻度标志
 #define CALIB_CAPDAMAX_FLAG             0x20                ///< 标定电容DA满度标志
 #define CALIB_CAPDAEOC_FLAG             0x33                ///< 标定电容DA结束标志
 
